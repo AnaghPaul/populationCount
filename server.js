@@ -29,7 +29,7 @@ const handleIndex = async (request) => {
 
 const handleRoot = async (request) => {
   return await handleIndex(request);
-}
+};
 
 const handleStyle = async (request) => {
   const body = await Deno.readFile("style.css");
@@ -37,6 +37,16 @@ const handleStyle = async (request) => {
   return new Response(body, {
     headers: {
       "content-type": "text/css",
+    },
+  });
+};
+
+const handleFetch = async (request) => {
+  const body = await Deno.readFile("fetch.js");
+
+  return new Response(body, {
+    headers: {
+      "content-type": "application/javascript",
     },
   });
 };
@@ -54,6 +64,7 @@ const handler = async (request) => {
     "/index.html": handleIndex,
     "/": handleRoot,
     "/style.css": handleStyle,
+    "/fetch.js": handleFetch,
   };
 
   if (url.pathname in routes) {

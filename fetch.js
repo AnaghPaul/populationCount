@@ -42,20 +42,16 @@ const main = () => {
       }
     );
 
-    // const reader = response.body.getReader();
-
-    // const json = decoder.decode((await reader.read()).value);
-
-    // const populationObject = JSON.parse(json);
-
     const populationObject = await response.json();
 
-    // console.log(
-    //   `${populationObject.count} people in ${populationObject.country}`
-    // );
+    console.log(
+      `${populationObject.count} people in ${populationObject.country} right now`
+    );
 
-    console.log(populationObject);
-  }, 5000);
+    const count = document.getElementById("count");
+
+    count.textContent = populationObject.readable_format;
+  }, 2000);
 };
 
 main();
